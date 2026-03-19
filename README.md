@@ -37,8 +37,7 @@
 ### Тестирование
 
 
-
-Скриншоты результата работы программы
+<img width="612" height="262" alt="Снимок экрана 2026-03-20 010810" src="https://github.com/user-attachments/assets/aceda8a7-5804-4ae8-88eb-5ddc62f1a0c0" />
 
 
 
@@ -77,6 +76,5 @@
 ### Тестирование
 
 
-
-Скриншоты результата работы программы
+<img width="622" height="270" alt="Снимок экрана 2026-03-20 015306" src="https://github.com/user-attachments/assets/d2342241-3d67-4354-a6ca-3781abf2dda6" />
 
