@@ -50,30 +50,42 @@ let rec searchDigitInTree tree digit =
             leftCount + rightCount + 1
     | None -> 0
 
-// Вывод бинарного дерева (обратный обход)
-let rec printTree tree =
+// Вывод бинарного дерева
+let rec printTree tree indent side =
     match tree with
-    | Some t ->
-        printTree t.left
-        printTree t.right
-        printf "%i " t.value
-    | None -> ()
+    | None -> "" 
+    | Some tree ->
+        let current = sprintf "%s%s%d" indent side tree.value
+        let left = printTree tree.left (indent + "  ") "L:"
+        let right = printTree tree.right (indent + "  ") "R:"
+        let children = [ 
+            if left <> "" then 
+                left
+            if right <> "" then 
+                right
+            ]
+        if List.isEmpty children then 
+            current
+        else 
+            current + "\n" + String.concat "\n" children
 
-// Создание бинарного дерева
-let rec createTree list =
-    match list with
-    | [] -> None
-    | head :: tail -> 
-        let subtree = createTree tail
-        Some (insert subtree head)
+// Функция генерации уникального числа
+let rec uniqueNumber usedNumbers =
+    let newNumber = Random().Next(-100, 100)
+    if List.contains newNumber usedNumbers then
+        uniqueNumber usedNumbers
+    else
+        newNumber
 
-// Создание списка из случайных чисел
-let createList number =
-    [1..number]
-    |> List.fold (fun acc x ->
-        acc @ [x*x - 2*x - 4]
-    ) []
-
+// Создание бинарного дерева с уникальными числами
+let rec createTree count numbers =
+    match count with
+    | 0 -> None, numbers
+    | _ ->
+        let newNumber = uniqueNumber numbers
+        let newNumbers = newNumber :: numbers
+        let subtree, resultNumbers = createTree (count - 1) newNumbers
+        Some (insert subtree newNumber), resultNumbers
 
 // Запрос и проверка цифры
 let rec checkDigit() = 
@@ -86,23 +98,20 @@ let rec checkDigit() =
         checkDigit()
     
 // Запрос и проверка количества элементов
-let rec checkElements() = 
+let rec checkCount() = 
     printf "Введите количество элементов бинарного дерева: "
-    let elements = int(Console.ReadLine())
-    if elements < 0 then
+    let count = int(Console.ReadLine())
+    if count < 0 then
         printfn "Количество элементов < 0!\n"
-        checkElements()
+        checkCount()
     else
-        elements
+        count
 
 [<EntryPoint>]
 let main args = 
-    let elements = checkElements()
-    let list = createList elements
-    let tree = createTree list
-    printf "Исходное дерево: "
-    printTree tree
-    printfn "\n"
+    let count = checkCount()
+    let tree, _ = createTree count []
+    printf "Исходное дерево: \n%s\n" (printTree tree "" "")
 
     let digit = checkDigit()
     let result = searchDigitInTree tree digit
