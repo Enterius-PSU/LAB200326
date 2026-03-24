@@ -1,4 +1,4 @@
-﻿// Кушев Александр БАС-2
+// Кушев Александр БАС-2
 // Лабораторная работа №4 (Задание №1)
 
 open System
@@ -11,7 +11,7 @@ type Tree = {
 }
 
 // Добавление цифры в конец числа
-let transformNumber number digit = 
+let transformNumber digit number = 
     if number < 0 then
         -(-number * 10 + digit)
     else if number > 0 then
@@ -32,12 +32,12 @@ let rec insert tree newValue =
         {value = newValue; left = None; right = None}
 
 // Создание нового дерева с изменёнными значениями
-let rec transformTree tree digit =
+let rec treeMap tree funcToApply =
     match tree with
     | Some t ->
-        let newValue = transformNumber t.value digit
-        let newLeft = transformTree t.left digit
-        let newRight = transformTree t.right digit
+        let newValue = funcToApply t.value
+        let newLeft = treeMap t.left funcToApply
+        let newRight = treeMap t.right funcToApply
         Some { value = newValue; left = newLeft; right = newRight }
     | None -> None
 
@@ -105,7 +105,7 @@ let main args =
     printf "Исходное дерево: \n%s\n" (printTree tree "" "")
 
     let digit = checkDigit()
-    let newTree = transformTree tree digit
+    let newTree = treeMap tree (transformNumber digit)
     printf "Изменённое дерево: \n%s\n" (printTree newTree "" "")
 
     System.Console.ReadKey() |> ignore
