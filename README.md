@@ -36,8 +36,7 @@
 ### Тестирование
 
 
-
-Скриншоты результата работы программы
+<img width="607" height="697" alt="LAB1" src="https://github.com/user-attachments/assets/7d672a29-6f62-441c-9d41-2cea664b9d82" />
 
 
 
@@ -75,6 +74,6 @@
 ### Тестирование
 
 
+<img width="621" height="540" alt="Снимок экрана 2026-03-24 071856" src="https://github.com/user-attachments/assets/e068ca31-cb17-4a7e-88f8-0a7b605e0d14" />
 
-Скриншоты результата работы программы
 
